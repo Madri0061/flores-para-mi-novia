@@ -1,0 +1,431 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Una flor para ti 💛</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: linear-gradient(145deg, #fff9fc, #ffeaf3, #fffdf7);
+  font-family: 'Georgia', serif;
+  color: #9b5575;
+  text-align: center;
+  cursor: pointer;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 25px 18px;
+  position: relative;
+  z-index: 2;
+}
+
+.subtitle {
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  letter-spacing: 4px;
+  color: #c68ba6;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: clamp(30px, 7vw, 48px);
+  font-weight: normal;
+  line-height: 1.25;
+  margin-bottom: 15px;
+}
+
+.intro {
+  max-width: 340px;
+  font-size: 16px;
+  line-height: 1.8;
+  color: #a77b91;
+  margin-bottom: 30px;
+}
+
+button {
+  border: 1px solid #edb5ce;
+  background: #fff;
+  color: #b45d85;
+  padding: 15px 28px;
+  border-radius: 40px;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0 7px 25px #e9a9c52b;
+  transition: .3s;
+}
+
+button:hover {
+  background: #fff0f6;
+  transform: translateY(-3px);
+}
+
+.hint {
+  margin-top: 25px;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  color: #c39aaf;
+}
+
+/* CARTA */
+
+.letter {
+  display: none;
+  width: min(100%, 430px);
+  background: #ffffffed;
+  border: 1px solid #f5d6e4;
+  border-radius: 25px;
+  padding: 30px 24px;
+  box-shadow: 0 15px 55px #d998b32b;
+  animation: openLetter 1s ease;
+}
+
+.letter.show {
+  display: block;
+}
+
+@keyframes openLetter {
+  from {
+    opacity: 0;
+    transform: translateY(25px) scale(.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.letter h2 {
+  font-size: 27px;
+  font-weight: normal;
+  color: #c06e92;
+  margin-bottom: 18px;
+}
+
+.letter p {
+  font-size: 16px;
+  line-height: 1.9;
+  margin: 13px 0;
+  color: #93677e;
+}
+
+.signature {
+  margin-top: 22px;
+  color: #c06e92;
+  font-size: 19px;
+  font-style: italic;
+}
+
+#mainFlower {
+  font-size: 100px;
+  margin: 15px 0;
+  animation: bloom 2s ease both;
+  filter: drop-shadow(0 5px 10px #f6d66c40);
+}
+
+@keyframes bloom {
+  0% {
+    transform: scale(0) rotate(-50deg);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.2) rotate(8deg);
+  }
+  100% {
+    transform: scale(1) rotate(0);
+    opacity: 1;
+  }
+}
+
+.letter button {
+  margin-top: 18px;
+}
+
+/* FLORES Y CORAZONES */
+
+.floating {
+  position: fixed;
+  pointer-events: none;
+  z-index: 5;
+  animation: floatUp var(--duration, 4s) ease-out forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translate(-50%, 0) rotate(0deg) scale(.3);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+    transform: translate(-50%, -25px) rotate(15deg) scale(1);
+  }
+  100% {
+    transform: translate(
+      calc(-50% + var(--drift)),
+      -110vh
+    ) rotate(var(--rotation)) scale(.7);
+    opacity: 0;
+  }
+}
+
+.burst {
+  position: fixed;
+  pointer-events: none;
+  z-index: 10;
+  font-size: 25px;
+  animation: burst 1.8s ease-out forwards;
+}
+
+@keyframes burst {
+  0% {
+    transform: translate(-50%, -50%) scale(.2);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(
+      calc(-50% + var(--x)),
+      calc(-50% + var(--y))
+    ) rotate(var(--r)) scale(1.2);
+    opacity: 0;
+  }
+}
+
+.footer {
+  margin-top: 28px;
+  font-size: 13px;
+  color: #c18ca5;
+}
+
+.hidden {
+  display: none !important;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div id="welcome">
+    <div class="subtitle">PARA EL AMOR DE MI VIDA</div>
+
+    <h1>
+      Una flor<br>
+      para ti, mi amor 🌷
+    </h1>
+
+    <p class="intro">
+      Si pudiera regalarte algo tan bonito
+      como lo que siento por ti, llenaría
+      el mundo entero de flores.
+    </p>
+
+    <button id="openBtn">
+      💌 Abrir mi cartita de amor
+    </button>
+
+    <p class="hint">
+      Toca la pantalla y deja florecer la magia ✨
+    </p>
+  </div>
+
+  <div class="letter" id="letter">
+
+    <div class="subtitle">CON TODO MI CORAZÓN</div>
+
+    <div id="mainFlower">🌻</div>
+
+    <h2>Para mi niña hermosa 💛</h2>
+
+    <p>
+      Mi amor, si pudiera pedirle algo a la vida,
+      sería que nunca te falten motivos para sonreír
+      y que jamás olvides lo maravillosa que eres.
+    </p>
+
+    <p>
+      Quiero que sepas que te amo no solamente
+      por tu sonrisa, por tus ojos o por lo hermosa
+      que eres, sino también por esa personita
+      tan especial que vive dentro de ti.
+    </p>
+
+    <p>
+      Te amo en los días bonitos y también en
+      aquellos en los que el mundo parece difícil.
+      Porque mi amor por ti no depende de que
+      todo sea perfecto. Te elijo con tus alegrías,
+      tus sueños, tus miedos y cada parte de ti.
+    </p>
+
+    <p>
+      Ojalá pudiera estar a tu lado ahora mismo,
+      abrazarte fuerte, darte esta flor y decirte
+      mirándote a los ojos que eres una de las
+      cosas más bonitas que me ha regalado la vida.
+    </p>
+
+    <p>
+      Y si algún día dudas de cuánto te amo,
+      recuerda esto: entre tantas personas,
+      mi corazón encontró en ti un lugar
+      donde quiere quedarse. ❤️
+    </p>
+
+    <p>
+      Esta flor amarilla es pequeñita comparada
+      con todo lo que siento por ti, pero lleva
+      un pedacito de mi corazón.
+    </p>
+
+    <div class="signature">
+      Te amo muchísimo, mi niña. 💗
+    </div>
+
+    <button id="moreFlowers">
+      🌸 Regálame más flores
+    </button>
+
+    <p class="footer">
+      Hecho con amor, solamente para ti ♡
+    </p>
+
+  </div>
+
+</div>
+
+<script>
+const flowers = [
+  "🌸", "🌼", "🌷", "🌺", "🌻",
+  "💐", "🌹", "🪷", "💮", "❤️",
+  "💕", "💗", "💖", "💘", "💝"
+];
+
+const openBtn = document.getElementById("openBtn");
+const welcome = document.getElementById("welcome");
+const letter = document.getElementById("letter");
+const mainFlower = document.getElementById("mainFlower");
+const moreFlowers = document.getElementById("moreFlowers");
+
+let opened = false;
+
+function randomFlower() {
+  return flowers[Math.floor(Math.random() * flowers.length)];
+}
+
+function createFloatingFlower(x = null, y = null) {
+  const flower = document.createElement("div");
+  flower.className = "floating";
+  flower.textContent = randomFlower();
+
+  const left = x === null
+    ? Math.random() * window.innerWidth
+    : x + (Math.random() - 0.5) * 180;
+
+  const top = y === null
+    ? window.innerHeight + 30
+    : y + (Math.random() - 0.5) * 80;
+
+  flower.style.left = left + "px";
+  flower.style.top = top + "px";
+  flower.style.fontSize = (20 + Math.random() * 28) + "px";
+  flower.style.setProperty("--duration", (3 + Math.random() * 3) + "s");
+  flower.style.setProperty("--drift", (Math.random() * 180 - 90) + "px");
+  flower.style.setProperty("--rotation", (Math.random() * 360 - 180) + "deg");
+
+  document.body.appendChild(flower);
+
+  setTimeout(() => flower.remove(), 6500);
+}
+
+function flowerRain(amount = 35) {
+  for (let i = 0; i < amount; i++) {
+    setTimeout(() => createFloatingFlower(), i * 65);
+  }
+}
+
+function flowerBurst(x, y, amount = 18) {
+  for (let i = 0; i < amount; i++) {
+    const flower = document.createElement("div");
+    flower.className = "burst";
+    flower.textContent = randomFlower();
+
+    const angle = Math.random() * Math.PI * 2;
+    const distance = 70 + Math.random() * 180;
+
+    flower.style.left = x + "px";
+    flower.style.top = y + "px";
+    flower.style.setProperty("--x", Math.cos(angle) * distance + "px");
+    flower.style.setProperty("--y", Math.sin(angle) * distance + "px");
+    flower.style.setProperty("--r", (Math.random() * 180 - 90) + "deg");
+
+    document.body.appendChild(flower);
+
+    setTimeout(() => flower.remove(), 2000);
+  }
+}
+
+openBtn.addEventListener("click", function(event) {
+  event.stopPropagation();
+
+  opened = true;
+  welcome.classList.add("hidden");
+  letter.classList.add("show");
+
+  mainFlower.style.animation = "none";
+  void mainFlower.offsetWidth;
+  mainFlower.style.animation = "bloom 2s ease both";
+
+  flowerRain(65);
+  flowerBurst(window.innerWidth / 2, window.innerHeight / 2, 35);
+});
+
+moreFlowers.addEventListener("click", function(event) {
+  event.stopPropagation();
+
+  flowerRain(60);
+  flowerBurst(
+    window.innerWidth / 2,
+    window.innerHeight / 2,
+    35
+  );
+});
+
+document.addEventListener("click", function(event) {
+  if (event.target.closest("button")) return;
+
+  flowerBurst(event.clientX, event.clientY, 16);
+
+  for (let i = 0; i < 5; i++) {
+    createFloatingFlower(event.clientX, event.clientY);
+  }
+});
+
+// Corazones y flores flotando suavemente
+setInterval(() => {
+  if (Math.random() > 0.35) {
+    createFloatingFlower();
+  }
+}, 850);
+</script>
+
+</body>
+</html>
